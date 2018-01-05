@@ -6,11 +6,26 @@ Read and write to a JSON file using an React Frontend and a NodeJS Backend
 
 ##Installation
 
-1. Clone this repository using '''git clone https://github.com/Skeletrox/ReactNodeTodo.git'''
+1. Clone this repository using
+```bash
+git clone https://github.com/Skeletrox/ReactNodeTodo.git
+```
 
-2. Ensure that NodeJS and NPM are installed in your machine. Run '''node -v''' and '''npm -v''' to ensure installation. This project uses NodeJS 8.9.4 and npm 5.6.0
+2. Ensure that NodeJS and NPM are installed in your machine. Run
+```bash
+node -v
+```
+and
 
-3. The project requires the following dependencies. Install them by typing '''npm install -S <<dependency_name>>>'''
+```bash
+npm -v
+```
+to ensure installation. This project uses NodeJS 8.9.4 and npm 5.6.0
+
+3. The project requires the following dependencies. Install them by typing
+```bash
+npm install -S <<dependency_name>>
+```
   * axios
   * react
   * react-dom
@@ -21,13 +36,13 @@ Read and write to a JSON file using an React Frontend and a NodeJS Backend
 ##Execution
 
 ###NodeJS Server
-'''
+```bash
 cd ReactNodeTodo
 node JSONRead/index.js
-'''
+```
 
 ###ReactJS Frontend
-'''
+```bash
 cd ReactNodeTodo/jsonread
 npm start
-'''
+```
