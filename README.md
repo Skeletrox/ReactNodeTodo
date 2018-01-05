@@ -39,12 +39,12 @@ Run the following commands in separate terminals for execution
 
 ### NodeJS Server
 ```bash
-cd ReactNodeTodo
-node JSONRead/index.js
+cd ReactNodeTodo/JSONRead
+node index.js
 ```
 
 ### ReactJS Frontend
 ```bash
-cd ReactNodeTodo/jsonread
+cd ReactNodeTodo/jsonreact
 npm start
 ```
