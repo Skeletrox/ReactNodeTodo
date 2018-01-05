@@ -4,7 +4,7 @@
 
 Read and write to a JSON file using an React Frontend and a NodeJS Backend
 
-## Installation
+## Cloning and Pre-Execution
 
 1. Clone this repository using
 ```bash
@@ -22,17 +22,6 @@ npm -v
 ```
   to ensure installation. This project uses NodeJS 8.9.4 and npm 5.6.0
 
-3. The project requires the following dependencies. Install them by typing
-```bash
-  npm install -S <dependency_name>
-```
-  * axios
-  * react
-  * react-dom
-  * create-react-app
-
-  These will help you modify the code later, and can help fix any permission errors that arise.
-
 ## Execution
 
 Run the following commands in separate terminals for execution
@@ -46,5 +35,6 @@ node index.js
 ### ReactJS Frontend
 ```bash
 cd ReactNodeTodo/jsonreact
+npm install
 npm start
 ```
