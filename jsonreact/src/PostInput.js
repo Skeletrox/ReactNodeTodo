@@ -14,6 +14,7 @@ class PostInput extends Component {
     };
   }
 
+//Handles the submit button in the post form
   postValue(event) {
     event.preventDefault();
     var todoID = this.state.id;
@@ -23,10 +24,12 @@ class PostInput extends Component {
     });
   }
 
+//Handles the entry of text in the ID field
   handleIDChange(event) {
     this.setState({id : event.target.value});
   }
 
+//Handles the entry of text in the Name field
   handleNameChange(event) {
     this.setState({name : event.target.value});
   }

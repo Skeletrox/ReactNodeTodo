@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({
   extended : true
 }));
 
+//Returns the Access-Control-Allow-Headers for the specified Origins and Methods
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -21,6 +22,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+//Promise-based function for reading from a file, so that asynchronous execution does not end up with required data having garbage values
 function readFromFile(fileName) {
   var promise = new Promise(function (resolve, reject) {
     fs.readFile(fileName, function(err, data) {
@@ -28,7 +30,6 @@ function readFromFile(fileName) {
         console.log("Error in reading file!");
         reject(Error("Cannot read from file!"));
       }
-      //console.log("Hello " + data);
       var returnData = null;
       try {
         returnData = JSON.parse(data)['todo'];
@@ -42,11 +43,10 @@ function readFromFile(fileName) {
   return promise;
 }
 
-
+//Sorts data and writes to file
 function writeToFile(writeData, fileName) {
   writeData = writeData.sort(function(a, b) {return Object.keys(a) - Object.keys(b)});
   var stringedData = JSON.stringify({'todo' : writeData});
-  //console.log("Going to write: " + stringedData);
   var result = true;
   fs.writeFile(fileName, stringedData, function (err) {
     if (err) {
@@ -57,20 +57,19 @@ function writeToFile(writeData, fileName) {
   return result;
 }
 
+//Identifies dictionary in a list of dictionaries by using the key
 function listContainsDict(list, key) {
   for (var i in list) {
-  //  console.log(list[i]);
     var now = list[i];
     if (now[key] != null) {
-      //console.log("FOUND");
       return i;
     }
   }
   return -1;
 }
 
+//The DELETE Handler
 app.delete('/delete', function (req, res) {
-  //console.log('Goodbye');
   var id = req.body['id'];
   var resultText = "Deleted task!";
   var promise = readFromFile(fileName);
@@ -100,8 +99,8 @@ app.delete('/delete', function (req, res) {
 
 });
 
+//The PUT handler
 app.put('/put', function (req, res) {
-  //console.log("Got put!");
   var id = req.body['id'];
   var resultText = "Successfully toggled finished status";
   var promise = readFromFile(fileName);
@@ -132,8 +131,8 @@ app.put('/put', function (req, res) {
   });
 });
 
+//The GET Handler
 app.get('/get', function (req, res) {
-  //console.log("We got a GET request!");
   var promise = readFromFile(fileName);
   promise.then(function (result) {
     var todos = result;
@@ -149,10 +148,15 @@ app.get('/get', function (req, res) {
   });
 });
 
+//The POST handler
 app.post('/post', function (req, res) {
-  var todoID = req.body['id']; //todoID
-  var todoName = req.body['name']; // -do-
-  if (todoID.search(/^[0-9]{4}$/) == -1) {
+  var todoID = req.body['id'];
+  var todoName = req.body['name'];
+
+  //ID validator, modify idRegExp for custom behavior
+  var idRegExp = /^[0-9]{4}$/;
+
+  if (todoID.search(idRegExp) == -1) {
     res.writeHead(201, {'Content-Type' : 'application/json'});
     var jsonResponse = {'result':'Illegal ID Format!'};
     jsonResponse = JSON.stringify(jsonResponse);
@@ -161,25 +165,21 @@ app.post('/post', function (req, res) {
     return;
   }
   var todoDone = false;
-  var resultText = "Successfully wrote to file!"; // cc
+  var resultText = "Successfully wrote to file!";
   var promise = readFromFile(fileName);
   promise.then(function (result) {
     var todos = result;
-    //console.log("TODOS is now: " + todos);
     if (todos == null) {
       console.log("Fresh Start");
       todos = new Array();
     }
-    var keyLocation = listContainsDict(todos, todoID); // change to something meaningful
+    var keyLocation = listContainsDict(todos, todoID);
     if(keyLocation != -1) {
       resultText = "Same ID already exists!";
     }
     else {
       todos.push({[todoID] : {'name' : todoName, 'done' : false}});
-      //console.log("Hello there!");
-      //console.log(todos);
       var done = writeToFile(todos, fileName);
-      //console.log(done);
       if (!(done)) {
         resultText = "Error writing to file!";
       }
@@ -198,7 +198,7 @@ app.post('/post', function (req, res) {
   });
 });
 
-
+//Starts the server
 app.listen(9090, function(err, data) {
   if (err) {
     console.log('Error ' + err);

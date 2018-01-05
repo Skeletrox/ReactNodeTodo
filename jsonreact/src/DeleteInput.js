@@ -8,7 +8,7 @@ class DeleteInput extends Component {
     //State variables: ID denotes the ID used in the body of the DELETE request, result stores the result sent back from the server
     this.state  = {
       id : '',
-      result : null,
+      result : null,  //result in DeleteInput, PostInput and PutInput determine the result obtained from the server
     };
     this.handleChange = this.handleChange.bind(this);
     this.deleteValue = this.deleteValue.bind(this);
@@ -33,7 +33,7 @@ class DeleteInput extends Component {
   }
 
   render() {
-    //Render the appropriate HTML 
+    //Render the appropriate HTML
     return (
       <div>
         <h3>Enter ID of TODO to delete</h3>

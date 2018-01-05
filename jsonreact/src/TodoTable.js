@@ -11,6 +11,7 @@ class TodoTable extends Component {
     };
   }
 
+//All the data is populated the moment the element is loaded
   componentDidMount() {
     var table = [];
     axios.get('http://localhost:9090/get').then(res => {
