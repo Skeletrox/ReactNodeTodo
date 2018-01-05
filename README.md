@@ -4,7 +4,7 @@
 
 Read and write to a JSON file using an React Frontend and a NodeJS Backend
 
-##Installation
+## Installation
 
 1. Clone this repository using
 ```bash
@@ -33,17 +33,17 @@ npm -v
 
   These will help you modify the code later, and can help fix any permission errors that arise.
 
-##Execution
+## Execution
 
 Run the following commands in separate terminals for execution
 
-###NodeJS Server
+### NodeJS Server
 ```bash
 cd ReactNodeTodo
 node JSONRead/index.js
 ```
 
-###ReactJS Frontend
+### ReactJS Frontend
 ```bash
 cd ReactNodeTodo/jsonread
 npm start
